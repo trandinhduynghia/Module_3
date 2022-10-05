@@ -9,20 +9,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Trang chu</title>
-
-
+    <title>Trang chủ</title>
 </head>
 <style>
+    body{
+        margin: 0;
+    }
     .header{
         width: 100%;
         height: 100px;
-        background-color: black;
+        border: solid 1px black;
     }
     .menu{
         width: 100%;
         height: 30px;
         border: solid 1px black;
+        background-color: grey;
         text-align: center;
     }
     .menu ul{
@@ -34,19 +36,19 @@
     }
     .menu a{
         text-decoration: none;
-        color: black;
+        color: white;
         font-family: Arial;
         font-size: smaller;
         padding: 5px;
     }
     .left{
-        width: 400px;
+        width: 200px;
         height: 900px;
         border: solid 1px black;
         float: left;
     }
     .right{
-        width: 1098px;
+        width: 1314px;
         height: 900px;
         border: solid 1px black;
         float: left;
@@ -57,18 +59,20 @@
         border: solid 1px black;
         clear: both;
         text-align: center;
+        background-color: grey;
+        color: aliceblue;
     }
 </style>
 <body>
 <div class="header">
 <img src="https://naturatex.com.my/wp-content/uploads/2016/05/Furama-RiverFront-Logo-White-HiRes.jpg"
-style="height: 100px; width: 100%">
+style="height: 100px; width: 30%">
 </div>
 
 <div class="menu">
         <ul>
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="#">Nhân viên</a></li>
+            <li><a href="/TrangChu">Trang chủ</a></li>
+            <li><a href="/NhanVien">Nhân viên</a></li>
             <li><a href="#">Khách hàng</a></li>
             <li><a href="#">Dịch vụ</a></li>
             <li><a href="#">Hợp đồng</a></li>

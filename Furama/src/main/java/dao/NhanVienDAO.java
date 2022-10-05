@@ -13,7 +13,7 @@ public class NhanVienDAO {
     private static final String SELECT_USER_BY_ID = "select * from nhanvien where MaNV =?";
     private static final String SELECT_ALL_NHANVIEN = "select * from nhanvien";
     private static final String DELETE_USERS_SQL = "delete from nhanvien where MaNV = ?;";
-    private static final String UPDATE_USERS_SQL = "update nhavien set HoTen = ?, NgaySinh = ?, SoCMND = ?, Luong = ?, SoDT = ?, Email = ?, DiaChi = ?, MaViTri = ?, MaTrinhDo = ?, MaBoPhan = ? where id = ?";
+    private static final String UPDATE_USERS_SQL = "update nhanvien set HoTen = ?, NgaySinh = ?, SoCMND = ?, Luong = ?, SoDT = ?, Email = ?, DiaChi = ?, MaViTri = ?, MaTrinhDo = ?, MaBoPhan = ? where MaNV = ?";
 
     public NhanVienDAO(){
 
