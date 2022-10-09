@@ -28,6 +28,7 @@
     body{
         margin-left: 20%;
         margin-right: 20%;
+        margin-top: 0;
     }
     .danhsach{
         background-color: black;

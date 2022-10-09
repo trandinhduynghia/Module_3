@@ -1,0 +1,151 @@
+.header{
+    width: 100%;
+    height: 70px;
+}
+#logo{
+    float: left;
+    padding-left: 50px;
+}
+#menu{
+    float: left;
+}
+#menu li{
+    display: inline-block;
+    line-height: 70px;
+}
+#menu a{
+    text-decoration: none;
+    color: black;
+    font-family: Arial;
+    font-size: smaller;
+}
+#menu a:hover{
+    text-decoration: underline;
+}
+.headerAread{
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    background-color: dodgerblue;
+    clear: both;
+}
+.headerAread a{
+    text-decoration: none;
+    color: white;
+    font-family: Arial;
+    line-height: 70px;
+}
+.information{
+    width: 100%;
+    height: 425px;
+    clear: both;
+    background-color: lightgrey;
+}
+#img1{
+    width: 60%;
+    height: 425px;
+    float: left;
+}
+#img11{
+    width: 40%;
+    height: 425px;
+    float: left;
+    padding-top: 80px;
+    padding-left: 10px;
+}
+#img11 a{
+    text-decoration: none;
+    color: white;
+    background-color: dodgerblue;
+    width: 80px;
+    height: 70px;
+    line-height: 50px;
+}
+.information1{
+    clear: both;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+}
+.information1 div{
+    float: left;
+    text-align: center;
+    padding: 40px;
+}
+.information2 {
+    clear: both;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.information2 div{
+    width: 25%;
+    float: left;
+    padding: 10px;
+}
+.information3{
+    clear: both;
+    width: 100%;
+    position: relative;
+    padding: 20px;
+}
+.information3 div{
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    width: 25%;
+    height: 50px;
+}
+.information4 {
+    clear: both;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.information4 div{
+    float: left;
+    width: 25%;
+    padding: 10px;
+}
+.information5{
+    clear: both;
+    width: 100%;
+    padding: 20px;
+    position: relative;
+}
+.information5 div{
+    position: absolute;
+    top: 100px;
+    left: 50px;
+    width: 25%;
+    height: 50px;
+}
+.information6{
+    clear: both;
+    width: 100%;
+    height: 70px;
+    padding: 20px;
+}
+.information6 div{
+    float: left;
+    padding: 10px;
+    line-height: 70px;
+}
+.information7{
+    clear: both;
+    background-color: lightgrey;
+    width: 100%;
+    height: 400px;
+}
+.information7 div{
+    float: left;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.information7 a{
+    color: black;
+    text-decoration: none;
+}
+.information a:hover{
+
+}

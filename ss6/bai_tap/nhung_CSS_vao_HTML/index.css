@@ -1,0 +1,13 @@
+h1{
+    color: green;
+    font-size: 200%;
+    font-family: Arial;
+}
+p{
+    color: blue;
+    font-size: 100%;
+    font-family: Arial;
+    width: 25%;
+    padding: 20px;
+    text-indent: 20px;
+}

@@ -25,10 +25,6 @@
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
-    body{
-        margin-left: 20%;
-        margin-right: 20%;
-    }
     .danhsach{
         background-color: black;
         text-align: center;
@@ -70,6 +66,68 @@
         text-decoration: none;
     }
 
+    * {box-sizing: border-box;}
+
+    body {
+        margin: 0;
+        <%--font-family: Arial, Helvetica, sans-serif;--%>
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: #e9e9e9;
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        height: 60px;
+        text-align: center;
+    }
+
+    .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .topnav a.active {
+        background-color: #2196F3;
+        color: white;
+    }
+
+    .topnav .search-container {
+        float: right;
+    }
+
+    .topnav input[type=text] {
+        padding: 6px;
+        margin-top: 8px;
+        font-size: 17px;
+        border: none;
+    }
+
+    .topnav .search-container button {
+        float: right;
+        padding: 6px;
+        margin-top: 8px;
+        margin-right: 16px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .topnav .search-container button:hover {
+        background: #ccc;
+    }
+
 
 </style>
 
@@ -79,14 +137,18 @@
 <div class="danhsach">
     <h2>Danh sách người dùng</h2>
 </div>
-<p></p>
-<div class="timkiem">
-    <form action="/DanhSachNguoiDung">
-        <input type="text" hint="search" value="${requestScope.hoTen}" name="hoTen">
-        <button type="get">Tìm</button>
-    </form>
-    <h5><a href="/DangKy">Thêm mới người dùng</a></h5>
+
+<div class="topnav">
+    <a href="/TrangChu">Trang chủ</a>
+    <a href="/DangKy">Thêm mới</a>
+    <div class="search-container">
+        <form action="/DanhSachNguoiDung">
+            <input type="text" hint="search" value="${requestScope.hoTen}"  name="hoTen">
+            <button type="get">Tìm</button>
+        </form>
+    </div>
 </div>
+
 
 <div style="overflow-x: auto;" class="bang">
     <table>

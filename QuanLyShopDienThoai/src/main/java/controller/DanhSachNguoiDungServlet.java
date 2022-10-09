@@ -16,7 +16,6 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -38,7 +37,7 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
                     danhSachNguoiDung(request, response);
                     break;
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             throw new ServletException(ex);
         }
     }
@@ -48,14 +47,14 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         int soLuongTrongTrang = 10;
         String hoTen = "";
 
-        if(request.getParameter("hoTen")!=null){
+        if (request.getParameter("hoTen") != null) {
             hoTen = request.getParameter("hoTen");
         }
 
-        if(request.getParameter("trang") != null)
+        if (request.getParameter("trang") != null)
             trang = Integer.parseInt(request.getParameter("trang"));
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
-        List<NguoiDung> listNguoiDung = nguoiDungDAO.danhSachNguoiDung((trang-1)*soLuongTrongTrang, soLuongTrongTrang, hoTen);
+        List<NguoiDung> listNguoiDung = nguoiDungDAO.danhSachNguoiDung((trang - 1) * soLuongTrongTrang, soLuongTrongTrang, hoTen);
         int soLuong = nguoiDungDAO.getSoLuong();
 
         int soLuongTrang = (int) Math.ceil(soLuong * 1.0 / soLuongTrongTrang);
@@ -70,23 +69,22 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void xoaNguoidung(HttpServletRequest request, HttpServletResponse response)  throws SQLException, IOException, ServletException {
+    private void xoaNguoidung(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int maNguoiDung = Integer.parseInt(request.getParameter("manguoidung"));
-        NguoiDungDAO  nguoiDungDAO = new NguoiDungDAO();
+        NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
         nguoiDungDAO.xoaNguoiDung(maNguoiDung);
         RequestDispatcher dispatcher = request.getRequestDispatcher("danhsachnguoidung.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void formSuaNguoiDung(HttpServletRequest request, HttpServletResponse response)  throws SQLException, ServletException, IOException{
+    private void formSuaNguoiDung(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int maNguoiDung = Integer.parseInt(request.getParameter("manguoidung"));
-        NguoiDungDAO  nguoiDungDAO = new NguoiDungDAO();
+        NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
         NguoiDung existingNguoiDung = nguoiDungDAO.nguoiDungTheoMa(maNguoiDung);
         RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/suanguoidung.jsp");
-        request.setAttribute("existingNguoiDung",existingNguoiDung);
-        dispatcher.forward(request,response);
+        request.setAttribute("existingNguoiDung", existingNguoiDung);
+        dispatcher.forward(request, response);
     }
-
 
 
     @Override
@@ -104,12 +102,12 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
                     suaNguoiDung(request, response);
                     break;
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             throw new ServletException(ex);
         }
     }
 
-    private void suaNguoiDung(HttpServletRequest request, HttpServletResponse response)  throws SQLException, IOException, ServletException {
+    private void suaNguoiDung(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int Manguoidung = Integer.parseInt(request.getParameter("manguoidung"));
         String Hoten = request.getParameter("hoten");
         String Email = request.getParameter("email");
@@ -117,10 +115,9 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         String Matkhau = request.getParameter("matkhau");
         int IDquyen = Integer.parseInt(request.getParameter("idquyen"));
         NguoiDung nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen);
-        NguoiDungDAO  nguoiDungDAO = new NguoiDungDAO();
+        NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
         nguoiDungDAO.suaNguoiDung(nguoiDung);
         RequestDispatcher dispatcher = request.getRequestDispatcher("danhsachnguoidung.jsp");
         dispatcher.forward(request, response);
     }
-
 }

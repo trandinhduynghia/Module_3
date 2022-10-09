@@ -51,26 +51,29 @@
 
 <body>
 
-<div class="jumbotron text-center" style="margin-bottom:0; padding: 0; height: 400px">
+<div class="jumbotron text-center" style="margin-bottom: 0; padding: 0; height: 400px">
     <img src="https://vatvostudio.vn/wp-content/uploads/2021/11/Apple-Store-1.jpg"
          style="width: 1518.4px; height: 400px">
 </div>
 
 
-<div class="menu" style="background-color: black; text-align: center; height: 50px">
+<div class="menu" style="background-color: black; text-align: center; height: 50px; width: 100%; float: left">
 
     <ul>
-        <li><a href="/TrangChu">Trang chủ</a></li>
+        <li style="float: left"><a href="/TrangChu">Trang chủ</a></li>
+        <c:if test="${sessionScope.nguoiDung != null}">
+            <li style="float: left"><a href="/ThongTinCaNhan?manguoidung=${sessionScope.nguoiDung.manguoidung}">Cá nhân</a></li>
+        </c:if>
+        <c:if test="${sessionScope.nguoiDung.IDquyen == 1}">
+            <li style="float: left"><a href="/DanhSachNguoiDung">Người dùng</a></li>
+        </c:if>
         <c:if test="${sessionScope.nguoiDung == null}">
-            <li><a href="/DangNhap">Đăng nhập</a></li>
+            <li style="float: right"><a href="/DangNhap">Đăng nhập</a></li>
         </c:if>
         <c:if test="${sessionScope.nguoiDung != null}">
-            <li><a href="/DangXuat">Đăng xuất</a></li>
+        <li style="float: right"><a href="/DangXuat">Đăng xuất</a></li>
         </c:if>
-        <li><a href="/DangKy">Đăng ký</a></li>
-        <c:if test="${sessionScope.nguoiDung.IDquyen == 1}">
-            <li><a href="/DanhSachNguoiDung">Người dùng</a></li>
-        </c:if>
+        <li style="float: right"><a href="/DangKy">Đăng ký</a></li>
     </ul>
 </div>
 
@@ -94,11 +97,12 @@
         <div class="col-sm-8">
 
             <c:forEach var="o" items="${list}">
-                <div class="sanpham" style="text-align: center; width: 200px; height: 300px; float: left; margin: 20px">
+                <div class="sanpham" style="text-align: center; width: 200px; height: 400px; float: left; margin: 20px">
                     <img src="${o.getAnhbia()}"
                          style="width: 200px; height: 200px"><br>
                     <a href="/ChiTietSanPham?Masp=${o.getMasp()}" style="color: black; font-family: Arial">${o.getTensp()}</a>
-                    <p style="font-weight: bolder">${o.getGiatien()}</p>
+                    <p style="font-weight: bolder">${o.getGiatien()} VNĐ</p>
+                    <button type="submit" style="font-family: Arial; background-color: #dddddd">Thêm vào giỏ</button>
                 </div>
             </c:forEach>
 

@@ -60,9 +60,17 @@
 <div class="menu" style="background-color: black; text-align: center; height: 50px">
 
     <ul>
-        <li><a href="/TrangChu">Trang chủ</a></li>
-        <li><a href="/DangNhap">Đăng nhập</a></li>
-        <li><a href="/DangKy">Đăng ký</a></li>
+        <li style="float: left"><a href="/TrangChu">Trang chủ</a></li>
+        <c:if test="${sessionScope.nguoiDung.IDquyen == 1}">
+            <li style="float: left"><a href="/DanhSachNguoiDung">Người dùng</a></li>
+        </c:if>
+        <c:if test="${sessionScope.nguoiDung == null}">
+            <li style="float: right"><a href="/DangNhap">Đăng nhập</a></li>
+        </c:if>
+        <c:if test="${sessionScope.nguoiDung != null}">
+            <li style="float: right"><a href="/DangXuat">Đăng xuất</a></li>
+        </c:if>
+        <li style="float: right"><a href="/DangKy">Đăng ký</a></li>
     </ul>
 </div>
 

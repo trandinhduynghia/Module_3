@@ -171,4 +171,19 @@ public class NguoiDungDAO {
         return rowUpdated;
     }
 
+    public boolean suaThongTinCaNhan(NguoiDung nguoiDung) throws SQLException {
+        boolean rowUpdated;
+        String query = "update nguoidung set Hoten = ?, Email= ?, Dienthoai = ?, Matkhau = ?, IDquyen = ? where Manguoidung = ?";
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1,nguoiDung.getHoten());
+            statement.setString(2,nguoiDung.getEmail());
+            statement.setString(3,nguoiDung.getDienthoai());
+            statement.setString(4,nguoiDung.getMatkhau());
+            statement.setInt(5,nguoiDung.getIDquyen());
+            statement.setInt(6,nguoiDung.getManguoidung());
+            rowUpdated = statement.executeUpdate() > 0;
+        }
+        return rowUpdated;
+    }
+
 }
