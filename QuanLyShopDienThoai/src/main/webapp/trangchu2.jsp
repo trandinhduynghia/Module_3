@@ -43,7 +43,8 @@
         text-decoration: none;
         color: #cccccc;
     }
-    .sanpham a:hover{
+
+    .sanpham a:hover {
         text-decoration: none;
     }
 
@@ -62,7 +63,8 @@
     <ul>
         <li style="float: left"><a href="/TrangChu">Trang chủ</a></li>
         <c:if test="${sessionScope.nguoiDung != null}">
-            <li style="float: left"><a href="/ThongTinCaNhan?manguoidung=${sessionScope.nguoiDung.manguoidung}">Cá nhân</a></li>
+            <li style="float: left"><a href="/ThongTinCaNhan?manguoidung=${sessionScope.nguoiDung.manguoidung}">Cá
+                nhân</a></li>
         </c:if>
         <c:if test="${sessionScope.nguoiDung.IDquyen == 1}">
             <li style="float: left"><a href="/DanhSachNguoiDung">Người dùng</a></li>
@@ -71,9 +73,10 @@
             <li style="float: right"><a href="/DangNhap">Đăng nhập</a></li>
         </c:if>
         <c:if test="${sessionScope.nguoiDung != null}">
-        <li style="float: right"><a href="/DangXuat">Đăng xuất</a></li>
+            <li style="float: right"><a href="/DangXuat">Đăng xuất</a></li>
         </c:if>
         <li style="float: right"><a href="/DangKy">Đăng ký</a></li>
+        <li style="float: right"><a href="/GioHang">Giỏ hàng</a></li>
     </ul>
 </div>
 
@@ -82,11 +85,12 @@
     <div class="row">
 
 
-        <div class="col-sm-4" >
+        <div class="col-sm-4">
             <ul class="nav nav-pills flex-column">
                 <c:forEach var="o" items="${list1}">
                     <li class="nav-item">
-                        <a class="nav-link" href="/HangSanXuat?Mahang=${o.getMahang()}" style="text-align: center; color: #aaaaaa; border: 1px solid #aaaaaa; margin: 20px">${o.getTenhang()}</a>
+                        <a class="nav-link" href="/HangSanXuat?Mahang=${o.getMahang()}"
+                           style="text-align: center; color: #aaaaaa; border: 1px solid #aaaaaa; margin: 20px">${o.getTenhang()}</a>
                     </li>
                 </c:forEach>
 
@@ -94,20 +98,23 @@
         </div>
 
 
-        <div class="col-sm-8">
+            <div class="col-sm-8">
+                <form method="post">
+                <c:forEach var="o" items="${list}">
+                    <div class="sanpham"
+                         style="text-align: center; width: 200px; height: 400px; float: left; margin: 20px">
+                        <img src="${o.getAnhbia()}"
+                             style="width: 200px; height: 200px"><br>
+                        <a href="/ChiTietSanPham?Masp=${o.getMasp()}"
+                           style="color: black; font-family: Arial">${o.getTensp()}</a>
+                        <p style="font-weight: bolder">${o.getGiatien()} VNĐ</p>
+                        <button type="submit" style="font-family: Arial; background-color: #dddddd"><a href="/GioHang?action=create&masp=${o.getMasp()}">Thêm vào giỏ</a></button>
+                    </div>
+                </c:forEach>
+                </form>
 
-            <c:forEach var="o" items="${list}">
-                <div class="sanpham" style="text-align: center; width: 200px; height: 400px; float: left; margin: 20px">
-                    <img src="${o.getAnhbia()}"
-                         style="width: 200px; height: 200px"><br>
-                    <a href="/ChiTietSanPham?Masp=${o.getMasp()}" style="color: black; font-family: Arial">${o.getTensp()}</a>
-                    <p style="font-weight: bolder">${o.getGiatien()} VNĐ</p>
-                    <button type="submit" style="font-family: Arial; background-color: #dddddd">Thêm vào giỏ</button>
-                </div>
-            </c:forEach>
+            </div>
 
-
-        </div>
 
 
     </div>

@@ -117,5 +117,31 @@ public class SanPhamDAO {
         return list;
     }
 
+    public SanPham sanPhamTheoMasp (String Masp1){
+        SanPham sanPham = null;
+        String query = "select * from sanpham where Masp = ?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setString(1, Masp1);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int Masp = rs.getInt("Masp");
+                String Tensp = rs.getString("Tensp");
+                double Giatien = rs.getDouble("Giatien");
+                int Soluong = rs.getInt("Soluong");
+                String Mota = rs.getString("Mota");
+                int Thesim = rs.getInt("Thesim");
+                int Bonhotrong = rs.getInt("Bonhotrong");
+                int Ram = rs.getInt("Ram");
+                String Anhbia = rs.getString("Anhbia");
+                int Mahang = rs.getInt("Mahang");
+                int Mahdh = rs.getInt("Mahdh");
+                sanPham = new SanPham (Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonhotrong, Ram, Anhbia, Mahang, Mahdh);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return sanPham;
+    }
+
 
 }

@@ -130,7 +130,7 @@
             <p>Vui lòng điền vào biểu mẫu này để tạo một tài khoản.</p>
             <hr>
             <label ><b>Họ tên</b></label>
-            <input type="text" placeholder="Họ tên" name="hoten" required>
+            <input type="text" placeholder="Họ tên" name="hoten" id="hoten"  required>
 
             <label ><b>Email</b></label>
             <input type="text" placeholder="Email" name="email" required>
@@ -155,4 +155,13 @@
     </form>
 </div>
 </body>
+
+<script>
+    function check(){
+        var hoten = document.getElementsByClassName(hoten);
+        if(hoten == ""){
+            alert("khong de trong");
+        }
+    }
+</script>
 </html>

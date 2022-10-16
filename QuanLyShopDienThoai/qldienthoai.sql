@@ -6,7 +6,12 @@ Manguoidung int,
 primary key (Madon),
 foreign key (Manguoidung) references nguoidung(Manguoidung)
 );
-
+ALTER TABLE donhang
+MODIFY COLUMN Madon int auto_increment;
+select  Madon from donhang order by Madon desc limit 1;
+select * from nguoidung;
+select * from donhang;
+select * from chitietdonhang;
 create table chitietdonhang(
 Madon int,
 Masp int,
