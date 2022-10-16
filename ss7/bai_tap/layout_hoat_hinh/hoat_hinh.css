@@ -14,6 +14,9 @@ body{
     background-color: lightgrey;
     text-align: center;
 }
+#head-link ul{
+    margin: 5px;
+}
 #head-link li{
     display: inline-block;
     width: 250px;
@@ -25,6 +28,7 @@ body{
     color: black;
     text-align: center;
     display: block;
+    border-left: black 1px solid;
 }
 #head-link a:hover{
     color: white;
