@@ -73,7 +73,7 @@ style="height: 100px; width: 30%">
         <ul>
             <li><a href="/TrangChu">Trang chủ</a></li>
             <li><a href="/NhanVien">Nhân viên</a></li>
-            <li><a href="#">Khách hàng</a></li>
+            <li><a href="/KhachHang">Khách hàng</a></li>
             <li><a href="#">Dịch vụ</a></li>
             <li><a href="#">Hợp đồng</a></li>
         </ul>

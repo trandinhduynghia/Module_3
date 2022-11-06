@@ -11,7 +11,7 @@ public class NhanVienDAO {
 
     private static final String INSERT_NHANVIEN_SQL = "INSERT INTO nhanvien" + "(HoTen, NgaySinh, SoCMND, Luong, SoDT, Email, DiaChi, MaViTri, MaTrinhDo, MaBoPhan) VALUES" +" (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String SELECT_USER_BY_ID = "select * from nhanvien where MaNV =?";
-    private static final String SELECT_ALL_NHANVIEN = "select * from nhanvien";
+    private static final String SELECT_ALL_NHANVIEN = "select * from nhanvien where HoTen like ?";
     private static final String DELETE_USERS_SQL = "delete from nhanvien where MaNV = ?;";
     private static final String UPDATE_USERS_SQL = "update nhanvien set HoTen = ?, NgaySinh = ?, SoCMND = ?, Luong = ?, SoDT = ?, Email = ?, DiaChi = ?, MaViTri = ?, MaTrinhDo = ?, MaBoPhan = ? where MaNV = ?";
 
@@ -36,6 +36,7 @@ public class NhanVienDAO {
         System.out.println(INSERT_NHANVIEN_SQL);
         try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_NHANVIEN_SQL)){
             preparedStatement.setString(1,nhanVien.getHoTen());
+            //ps.setDate(2, Date.valueOf(student.getBirthday()));
             preparedStatement.setString(2,nhanVien.getNgaySinh());
             preparedStatement.setString(3,nhanVien.getSoCMND());
             preparedStatement.setDouble(4, nhanVien.getLuong());
@@ -79,16 +80,16 @@ public class NhanVienDAO {
         return nhanVien;
     }
 
-    public List<NhanVien> selectAllNhanVien() {
+    public List<NhanVien> selectAllNhanVien(String q) {
         List<model.NhanVien> nhanViens = new ArrayList<>();
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
              // Step 2:Create a statement using connection object
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_NHANVIEN);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_NHANVIEN)) {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
+            preparedStatement.setString(1, '%'+ q + '%');
             ResultSet rs = preparedStatement.executeQuery();
-
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 int MaNV = rs.getInt("MaNV");

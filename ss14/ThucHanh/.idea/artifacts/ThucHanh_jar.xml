@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ThucHanh:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ThucHanh_jar</output-path>
+    <root id="archive" name="ThucHanh.jar">
+      <element id="module-output" name="ThucHanh" />
+    </root>
+  </artifact>
+</component>

@@ -10,9 +10,9 @@ public class ProductServiceImpl implements ProductService {
     private static Map<Integer, Product> products;
     static {
         products = new HashMap<>();
-        products.put(1, new Product(1, "heniken", 500, "bia", "heniken"));
+        products.put(1, new Product(1, "heniken", 21000000, "bia", "heniken"));
         products.put(2, new Product(2, "tiger", 400, "bia", "tiger"));
-        products.put(3, new Product(3, "cocacola", 200, "nuoc ngot", "tiger"));
+        products.put(3, new Product(3, "cocacola", 200, "nước ngọt", "cocacola"));
     }
     @Override
     public List<Product> findAll() {

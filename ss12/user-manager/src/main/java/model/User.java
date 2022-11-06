@@ -1,5 +1,11 @@
 package model;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class User {
     protected int id;
     protected String name;
@@ -33,6 +39,9 @@ public class User {
         this.id = id;
     }
 
+    @NotEmpty(message = "Tên không được để trống")
+    @Length(min = 3, max = 10, message = "Tên dài từ 3 - 10")
+    //@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})", message = "Format password not right") mat khau
     public String getName() {
         return name;
     }
@@ -41,6 +50,8 @@ public class User {
         this.name = name;
     }
 
+    @NotEmpty(message = "Email không được để trống")
+    @Email(message = "Email không đúng định dạng")
     public String getEmail() {
         return email;
     }
@@ -49,6 +60,7 @@ public class User {
         this.email = email;
     }
 
+    @NotEmpty(message = "Địa chỉ không được để trống")
     public String getCountry() {
         return country;
     }

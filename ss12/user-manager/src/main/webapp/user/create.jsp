@@ -26,7 +26,6 @@
                 <th>User Name:</th>
                 <td>
                     <input type="text" name="name" id="name">
-                    <p id="validatename"></p>
                 </td>
             </tr>
             <tr>
@@ -46,6 +45,10 @@
             </tr>
         </table>
     </form>
+</div>
+<div style="color: red">
+    ${errors}
+
 </div>
 </body>
 

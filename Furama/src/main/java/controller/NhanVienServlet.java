@@ -46,30 +46,35 @@ public class NhanVienServlet extends HttpServlet {
     }
 
     private void listNhanVien(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        List<NhanVien> listNhanVien = nhanVienDAO.selectAllNhanVien();
+        String q =  "";
+        if (request.getParameter("q") != null) {
+            q = request.getParameter("q");
+        }
+        List<NhanVien> listNhanVien = nhanVienDAO.selectAllNhanVien(q);
         request.setAttribute("listNhanVien",listNhanVien);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/listnhanvien.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nhanvien/listnhanvien.jsp");
         dispatcher.forward(request, response);
     }
 
     private void deleteNhanVien(HttpServletRequest request, HttpServletResponse response)  throws SQLException, IOException, ServletException {
         int MaNV = Integer.parseInt(request.getParameter("MaNV"));
         nhanVienDAO.deleteNhanVien(MaNV);
-        List<NhanVien> nhanViens = nhanVienDAO.selectAllNhanVien();
+        String q =  "";
+        List<NhanVien> nhanViens = nhanVienDAO.selectAllNhanVien(q);
         request.setAttribute("nhanViens",nhanViens);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("suanhanvien.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nhanvien/listnhanvien.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("themnhanvien.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nhanvien/themnhanvien.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)  throws SQLException, ServletException, IOException{
         int MaNV = Integer.parseInt(request.getParameter("MaNV"));
         NhanVien existingNhanVien = nhanVienDAO.selectNhanVien(MaNV);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("suanhanvien.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nhanvien/suanhanvien.jsp");
         request.setAttribute("existingNhanVien",existingNhanVien);
         dispatcher.forward(request,response);
     }
@@ -109,7 +114,7 @@ public class NhanVienServlet extends HttpServlet {
 
         NhanVien nhanVien = new NhanVien(MaNV, HoTen, NgaySinh, SoCMND, Luong, SoDT, Email, DiaChi, MaViTri, MaTrinhDo, MaBoPhan);
         nhanVienDAO.updateUser(nhanVien);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("suanhanvien.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nhanvien/suanhanvien.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -126,7 +131,7 @@ public class NhanVienServlet extends HttpServlet {
         Integer MaBoPhan = Integer.parseInt(request.getParameter("MaBoPhan"));
         NhanVien newNhanVien = new NhanVien(HoTen, NgaySinh, SoCMND, Luong, SoDT, Email, DiaChi, MaViTri, MaTrinhDo, MaBoPhan);
         nhanVienDAO.insertNhanVien(newNhanVien);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("themnhanvien.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nhanvien/themnhanvien.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -117,7 +117,8 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         NguoiDung nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen);
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
         nguoiDungDAO.suaNguoiDung(nguoiDung);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("danhsachnguoidung.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("/DanhSachNguoiDung");
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("danhsachnguoidung.jsp");
+//        dispatcher.forward(request, response);
     }
 }

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ThucHanh_jar">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../ThucHanh/out/artifacts/ThucHanh_jar" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../ThucHanh/out/artifacts/ThucHanh_jar" recursive="false" />
+  </library>
+</component>

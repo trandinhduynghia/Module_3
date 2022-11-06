@@ -10,7 +10,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
-
 @WebServlet(name = "TrangChuServlet", urlPatterns = "/TrangChu")
 public class TrangChuServlet extends HttpServlet {
     @Override

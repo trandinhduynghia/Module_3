@@ -124,13 +124,14 @@
     }
 </style>
 <body>
-    <form method="post" class="modal-content" >
+    <form method="post" class="modal-content" name="dangky" >
         <div class="container">
             <h1>Đăng ký</h1>
             <p>Vui lòng điền vào biểu mẫu này để tạo một tài khoản.</p>
             <hr>
             <label ><b>Họ tên</b></label>
             <input type="text" placeholder="Họ tên" name="hoten" id="hoten"  required>
+            <p id="hoten1"></p>
 
             <label ><b>Email</b></label>
             <input type="text" placeholder="Email" name="email" required>
@@ -156,11 +157,11 @@
 </div>
 </body>
 
-<script>
-    function check(){
-        var hoten = document.getElementsByClassName(hoten);
+<script type="text/javascript">
+    function Validate(){
+        var hoten = document.dangky.hoten.value;
         if(hoten == ""){
-            alert("khong de trong");
+            document.getElementById("hoten1").innerHTML = "k de trong";
         }
     }
 </script>
