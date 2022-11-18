@@ -103,7 +103,10 @@
 
     <form class="row g-3" action="/KhachHang">
         <div class="col-auto">
-            <input type="text" class="form-control" value="${requestScope.q}" placeholder="Tìm kiếm" name="q">
+            <input type="text" class="form-control" value="${requestScope.q}" placeholder="Họ tên" name="q">
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" value="${requestScope.q1}" placeholder="Giới tính" name="q1">
         </div>
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">Tìm kiếm</button>
@@ -139,8 +142,7 @@
 
 
                     <td><c:out value="${o.getHoTen()}"/></td>
-                    <td><fmt:formatDate pattern="dd/MM/yyyy" value="${o.getNgaySinh()}"/></td>
-<%--                    <td><c:out value="${o.getNgaySinh()}"/></td>--%>
+                    <td><c:out value="${o.getNgaySinh()}"/></td>
                     <td><c:out value="${o.getGioiTinh()}"/></td>
                     <td><c:out value="${o.getSoCMND()}"/></td>
                     <td><c:out value="${o.getSoDT()}"/></td>
@@ -156,6 +158,9 @@
                                 <a class="nav-link active" aria-current="page" href="/KhachHang?action=delete&MaKH=${o.getMaKH()}" style="background-color: darkred">Xóa</a>
                             </li>
                             </ul>
+                        <button type="button" onclick="infoDelete('${o.getMaKH()}','${o.getHoTen()}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Xóa
+                        </button>
                     </td>
                 </tr>
 
@@ -178,5 +183,36 @@
 <div class="footer">
     Copyright © 2022
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/KhachHang" method="get">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<%--                    chú ý action và value và name--%>
+                    <input name="action" value="delete" hidden>
+                    <input name="MaKH" id="MaKH" hidden>
+                    <span class="text-danger">Bạn có muốn xoá khách hàng </span><span id="HoTen"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Xóa</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<script>
+    function infoDelete(MaKH, HoTen) {
+        document.getElementById("MaKH").value=MaKH;
+        document.getElementById("HoTen").innerText=HoTen;
+    }
+</script>
 </body>
 </html>

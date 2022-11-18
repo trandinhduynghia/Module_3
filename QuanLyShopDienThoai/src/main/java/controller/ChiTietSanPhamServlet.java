@@ -1,8 +1,6 @@
 package controller;
 
-import dao.HangSanXuatDAO;
 import dao.SanPhamDAO;
-import model.HangSanXuat;
 import model.SanPham;
 
 import javax.servlet.*;
@@ -17,12 +15,12 @@ public class ChiTietSanPhamServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String Masp = request.getParameter("Masp");
         SanPhamDAO dao = new SanPhamDAO();
-        List<SanPham> list = dao.danhSachSanPhamTheoMasp(Masp);
+        List<SanPham> list = (List<SanPham>) dao.sanPhamTheoMasp(Masp);
         request.setAttribute("list",list);
 
-        HangSanXuatDAO dao1 = new HangSanXuatDAO();
-        List<HangSanXuat> list1 = dao1.danhHangSanXuat();
-        request.setAttribute("list1",list1);
+//        HangSanXuatDAO dao1 = new HangSanXuatDAO();
+//        List<HangSanXuat> list1 = dao1.danhHangSanXuat();
+//        request.setAttribute("list1",list1);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("chitietsanpham.jsp");
         dispatcher.forward(request, response);

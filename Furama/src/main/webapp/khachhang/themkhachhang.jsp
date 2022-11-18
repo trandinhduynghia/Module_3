@@ -104,20 +104,22 @@
     </div>
 
     <div>
-        <form class="row g-3" method="post">
+        <form class="row g-3" method="post" action="/KhachHang?action=create">
 
             <div class="col-12">
                 <label  class="form-label">Mã loại khách</label>
                 <select class="form-select" aria-label="Default select example" name="MaLoaiKhach">
-                    <option selected>Chọn mã loại khách</option>
+                    <option value="0">Chọn mã loại khách</option>
                     <c:forEach var="o" items="${maLoaiKhachs}">
                         <option value="${o.getMaLoaiKhach()}">${o.getTenLoaiKhach()}</option>
                     </c:forEach>
                 </select>
+                <p style="color: red"> ${errorMap.get('MaLoaiKhach')}</p>
             </div>
             <div class="col-12">
                 <label  class="form-label">Họ tên</label>
                 <input type="text" class="form-control" name="HoTen">
+                <p style="color: red"> ${errorMap.get('HoTen')}</p>
             </div>
             <div class="col-12">
                 <label  class="form-label">Ngày sinh</label>
@@ -134,14 +136,17 @@
             <div class="col-12">
                 <label  class="form-label">Số CMND</label>
                 <input type="text" class="form-control" name="SoCMND">
+                <p style="color: red"> ${errorMap.get('CMND')}</p>
             </div>
             <div class="col-12">
                 <label  class="form-label">Số điện thoại</label>
                 <input type="text" class="form-control" name="SoDT">
+                <p style="color: red"> ${errorMap.get('SDT')}</p>
             </div>
             <div class="col-12">
                 <label  class="form-label">Email</label>
                 <input type="text" class="form-control" name="Email">
+                <p style="color: red"> ${errorMap.get('Email')}</p>
             </div>
             <div class="col-12">
                 <label  class="form-label">Địa chỉ</label>

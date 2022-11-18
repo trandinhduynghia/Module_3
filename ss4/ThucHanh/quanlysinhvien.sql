@@ -14,7 +14,7 @@ from student s join mark m on s.StudentId=m.StudentId
 group by s.StudentId, m.StudentId
 having avg(Mark) >= all (select avg(Mark) from mark group by Mark.StudentId);
 
--- hien thi thong tin mon hoc co credit lon nhat
+-- hien thi thong tin mon hoc co credit lon nhatkhachhang
 select SubId, SubName, max(Credit), Status 
 from subject; 
 

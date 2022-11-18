@@ -146,6 +146,8 @@
         <input type="password" placeholder="Mật khẩu" name="matkhau" required>
 
         <button type="submit">Đăng nhập</button>
+
+        <button type="button" style="background-color: #005cbf"><a href="/DangKy" style="color: white; text-decoration: none">Đăng ký</a></button>
         <label>
             <input type="checkbox" checked="checked" name="remember"> Ghi nhớ tài khoản
         </label>

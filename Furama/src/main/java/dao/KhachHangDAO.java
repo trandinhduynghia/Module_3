@@ -44,13 +44,14 @@ public class KhachHangDAO {
         }
     }
 
-    public List<KhachHang> hienThiKhachHang(String q) {
+    public List<KhachHang> hienThiKhachHang(String q, String q1) {
         List<KhachHang> khachHangs = new ArrayList<>();
-        String query = "select * from khachhang where HoTen like ?";
+        String query = "select * from khachhang where HoTen like ? and GioiTinh like ?";
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, '%'+ q + '%');
+            preparedStatement.setString(2, '%'+ q1 + '%');
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int MaKH = rs.getInt("MaKH");

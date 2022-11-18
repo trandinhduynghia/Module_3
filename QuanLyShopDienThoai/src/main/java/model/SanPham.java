@@ -6,28 +6,38 @@ public class SanPham {
     private double Giatien;
     private int Soluong;
     private String Mota;
-    private int Thesim;
-    private int Bonhotrong;
-    private int Ram;
+    private String Thesim;
+    private String Bonho;
+    private String Ram;
     private String Anhbia;
-    private int Mahang;
-    private int Mahdh;
+    private int Madanhmuc;
 
     public SanPham() {
     }
 
-    public SanPham(int masp, String tensp, double giatien, int soluong, String mota, int thesim, int bonhotrong, int ram, String anhbia, int mahang, int mahdh) {
+    public SanPham(int masp, String tensp, double giatien, int soluong, String mota, String thesim, String bonho, String ram, String anhbia, int madanhmuc) {
         Masp = masp;
         Tensp = tensp;
         Giatien = giatien;
         Soluong = soluong;
         Mota = mota;
         Thesim = thesim;
-        Bonhotrong = bonhotrong;
+        Bonho = bonho;
         Ram = ram;
         Anhbia = anhbia;
-        Mahang = mahang;
-        Mahdh = mahdh;
+        Madanhmuc = madanhmuc;
+    }
+
+    public SanPham(String tensp, double giatien, int soluong, String mota, String thesim, String bonho, String ram, String anhbia, int madanhmuc) {
+        Tensp = tensp;
+        Giatien = giatien;
+        Soluong = soluong;
+        Mota = mota;
+        Thesim = thesim;
+        Bonho = bonho;
+        Ram = ram;
+        Anhbia = anhbia;
+        Madanhmuc = madanhmuc;
     }
 
     public int getMasp() {
@@ -70,27 +80,27 @@ public class SanPham {
         Mota = mota;
     }
 
-    public int getThesim() {
+    public String getThesim() {
         return Thesim;
     }
 
-    public void setThesim(int thesim) {
+    public void setThesim(String thesim) {
         Thesim = thesim;
     }
 
-    public int getBonhotrong() {
-        return Bonhotrong;
+    public String getBonho() {
+        return Bonho;
     }
 
-    public void setBonhotrong(int bonhotrong) {
-        Bonhotrong = bonhotrong;
+    public void setBonho(String bonho) {
+        Bonho = bonho;
     }
 
-    public int getRam() {
+    public String getRam() {
         return Ram;
     }
 
-    public void setRam(int ram) {
+    public void setRam(String ram) {
         Ram = ram;
     }
 
@@ -102,19 +112,11 @@ public class SanPham {
         Anhbia = anhbia;
     }
 
-    public int getMahang() {
-        return Mahang;
+    public int getMadanhmuc() {
+        return Madanhmuc;
     }
 
-    public void setMahang(int mahang) {
-        Mahang = mahang;
-    }
-
-    public int getMahdh() {
-        return Mahdh;
-    }
-
-    public void setMahdh(int mahdh) {
-        Mahdh = mahdh;
+    public void setMadanhmuc(int madanhmuc) {
+        Madanhmuc = madanhmuc;
     }
 }

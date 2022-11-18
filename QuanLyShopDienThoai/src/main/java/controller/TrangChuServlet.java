@@ -1,8 +1,8 @@
 package controller;
 
-import dao.HangSanXuatDAO;
+import dao.DanhMucDAO;
 import dao.SanPhamDAO;
-import model.HangSanXuat;
+import model.DanhMuc;
 import model.SanPham;
 
 import javax.servlet.*;
@@ -14,17 +14,21 @@ import java.util.List;
 public class TrangChuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //b1: lấy dữ liệu từ form dao
-        SanPhamDAO dao = new SanPhamDAO();
-        List<SanPham> list = dao.danhSachSanPham();
-        //b2: set data to jsp
-        request.setAttribute("list",list);
 
-        HangSanXuatDAO dao1 = new HangSanXuatDAO();
-        List<HangSanXuat> list1 = dao1.danhHangSanXuat();
-        request.setAttribute("list1",list1);
+        String q =  "";
+        if (request.getParameter("q") != null) {
+            q = request.getParameter("q");
+        }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("trangchu2.jsp");
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        List<SanPham> sanPhams = sanPhamDAO.danhSachSanPham(q);
+        request.setAttribute("sanPhams",sanPhams);
+
+        DanhMucDAO danhMucDAO = new DanhMucDAO();
+        List<DanhMuc> danhMucs = danhMucDAO.listDanhMuc();
+        request.setAttribute("danhMucs", danhMucs);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ogani-master/index.jsp");
         dispatcher.forward(request, response);
     }
 

@@ -5,19 +5,23 @@ import dao.NhanVienDAO;
 import model.KhachHang;
 import model.MaLoaiKhach;
 import model.NhanVien;
+import validate.Validation;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "KhachHangServlet", urlPatterns = "/KhachHang")
 public class KhachHangServlet extends HttpServlet {
     private static final long seialVersionUID = 1L;
     private KhachHangDAO khachHangDAO;
-    public void init(){
+
+    public void init() {
         khachHangDAO = new KhachHangDAO();
     }
 
@@ -42,32 +46,38 @@ public class KhachHangServlet extends HttpServlet {
                     listKH(request, response);
                     break;
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             throw new ServletException(ex);
         }
 
     }
 
     private void listKH(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-         String q =  "";
+        String q = "";
         if (request.getParameter("q") != null) {
             q = request.getParameter("q");
         }
-        List<KhachHang> listKH = khachHangDAO.hienThiKhachHang(q);
-        request.setAttribute("listKH",listKH);
+        String q1 = "";
+        if (request.getParameter("q1") != null) {
+            q1 = request.getParameter("q1");
+        }
+        List<KhachHang> listKH = khachHangDAO.hienThiKhachHang(q, q1);
+        request.setAttribute("listKH", listKH);
 
         List<MaLoaiKhach> maLoaiKhachs = khachHangDAO.hienThiMaLoaiKhach();
         request.setAttribute("maLoaiKhachs", maLoaiKhachs);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("khachhang/listkhachhang.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void deleteKH(HttpServletRequest request, HttpServletResponse response)  throws SQLException, IOException, ServletException {
+    private void deleteKH(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int MaKH = Integer.parseInt(request.getParameter("MaKH"));
         khachHangDAO.xoaKhachHang(MaKH);
-        String q =  "";
-        List<KhachHang> listKH = khachHangDAO.hienThiKhachHang(q);
-        request.setAttribute("listKH",listKH);
+        String q = "";
+        String q1 = "";
+        List<KhachHang> listKH = khachHangDAO.hienThiKhachHang(q, q1);
+        request.setAttribute("listKH", listKH);
         RequestDispatcher dispatcher = request.getRequestDispatcher("khachhang/listkhachhang.jsp");
         dispatcher.forward(request, response);
     }
@@ -79,7 +89,7 @@ public class KhachHangServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response)  throws SQLException, ServletException, IOException{
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int MaKH = Integer.parseInt(request.getParameter("MaKH"));
         KhachHang khachHang = khachHangDAO.timKhachHang(MaKH);
         request.setAttribute("khachHang", khachHang);
@@ -87,7 +97,7 @@ public class KhachHangServlet extends HttpServlet {
         List<MaLoaiKhach> maLoaiKhachs = khachHangDAO.hienThiMaLoaiKhach();
         request.setAttribute("maLoaiKhachs", maLoaiKhachs);
         RequestDispatcher dispatcher = request.getRequestDispatcher("khachhang/suakhachhang.jsp");
-        dispatcher.forward(request,response);
+        dispatcher.forward(request, response);
     }
 
     @Override
@@ -105,13 +115,13 @@ public class KhachHangServlet extends HttpServlet {
                     updateKH(request, response);
                     break;
             }
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             throw new ServletException(ex);
         }
 
     }
 
-    private void updateKH(HttpServletRequest request, HttpServletResponse response)  throws SQLException, IOException, ServletException {
+    private void updateKH(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int MaKH = Integer.parseInt(request.getParameter("MaKH"));
         int MaLoaiKhach = Integer.parseInt(request.getParameter("MaLoaiKhach"));
         String HoTen = request.getParameter("HoTen");
@@ -138,8 +148,47 @@ public class KhachHangServlet extends HttpServlet {
         String Email = request.getParameter("Email");
         String DiaChi = request.getParameter("DiaChi");
         KhachHang khachHang = new KhachHang(MaLoaiKhach, HoTen, NgaySinh, GioiTinh, SoCMND, SoDT, Email, DiaChi);
-        khachHangDAO.themKhachHang(khachHang);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("khachhang/listkhachhang.jsp");
-        dispatcher.forward(request, response);
+
+        Map<String, String> errorMap = new HashMap<>();
+        if ("".equals(khachHang.getHoTen())) {
+            errorMap.put("HoTen", "Họ tên không được để trống");
+        }else if(!Validation.checkTen(khachHang.getHoTen())){
+            errorMap.put("HoTen","Họ tên không đúng định dạng");
+        }
+        if ("".equals(khachHang.getEmail())) {
+            errorMap.put("Email", "Email không được để trống");
+        }else if(!Validation.checkEmail(khachHang.getEmail())){
+            errorMap.put("Email","Email không đúng định dạng");
+        }
+        if ("".equals(khachHang.getSoDT())) {
+            errorMap.put("SDT", "SDT không được để trống");
+        }else if(!Validation.checkSDT(khachHang.getSoDT())){
+            errorMap.put("SDT","SDT không đúng định dạng");
+        }
+        if ("".equals(khachHang.getSoCMND())) {
+            errorMap.put("CMND", "CMND không được để trống");
+        }else if(!Validation.checkCMND(khachHang.getSoCMND())){
+            errorMap.put("CMND","CMND không đúng định dạng");
+        }
+        if (0 == (khachHang.getMaLoaiKhach())) {
+            errorMap.put("MaLoaiKhach", "Mã loại khách không được để trống");
+        }
+            // nêu không có lỗi thì cho lưu vào db
+            if (errorMap.isEmpty()) {
+                khachHangDAO.themKhachHang(khachHang);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("khachhang/listkhachhang.jsp");
+                dispatcher.forward(request, response);
+            }else {
+                List<MaLoaiKhach> maLoaiKhachs = khachHangDAO.hienThiMaLoaiKhach();
+                request.setAttribute("maLoaiKhachs", maLoaiKhachs);
+
+                request.setAttribute("errorMap", errorMap);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("khachhang/themkhachhang.jsp");
+                dispatcher.forward(request, response);
+            }
+        }
+
+
     }
-}
+
+

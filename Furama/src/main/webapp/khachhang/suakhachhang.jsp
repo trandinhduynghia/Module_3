@@ -106,7 +106,7 @@
     </div>
 
     <div>
-        <form class="row g-3" method="post">
+        <form class="row g-3" method="post" action="/KhachHang?action=edit">
             <c:if test="${khachHang != null}">
 
             </c:if>
@@ -116,12 +116,14 @@
             </div>
             <div class="col-12">
                 <label  class="form-label">Mã loại khách</label>
+
                 <select class="form-select" aria-label="Default select example" name="MaLoaiKhach">
                     <option selected>Chọn mã loại khách</option>
                     <c:forEach var="o" items="${maLoaiKhachs}">
                         <option value="${o.getMaLoaiKhach()}">${o.getTenLoaiKhach()}</option>
                     </c:forEach>
                 </select>
+
                 <input type="text" class="form-control" name="MaLoaiKhach" value="${khachHang.getMaLoaiKhach()}">
             </div>
             <div class="col-12">
@@ -136,7 +138,7 @@
             <div class="col-12">
                 <label  class="form-label">Giới tính</label>
                 <select class="form-select" aria-label="Default select example" name="GioiTinh" >
-                    <option selected>Chọn giới tính</option>
+                    <option value="${khachHang.getGioiTinh()}">${khachHang.getGioiTinh()}</option>
                     <option value="nam">Nam</option>
                     <option value="nữ">Nữ</option>
                 </select>
@@ -169,6 +171,7 @@
 <div class="footer">
     Copyright © 2022
 </div>
+
 
 </body>
 </html>

@@ -357,7 +357,7 @@ call sp_them_moi_hop_dong(15, 1);
 -- 25
 
 select * from hopdong;
-select * from khachhang;
+select * from khachhang where HoTen like '%nghia%' and GioiTinh like '%nam%';
 select * from nhanvien;
 select * from hopdongchitiet;
 select * from dichvudikem;
