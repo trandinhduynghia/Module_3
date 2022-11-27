@@ -173,10 +173,8 @@
 <p></p>
 <form method="post" class="modal-content" >
     <div class="container">
-        <label ><b>Mã người dùng</b></label>
-        <p></p>
-        <label name ="ManguoiDung">${existingNguoiDung.getManguoidung()}</label>
-        <p></p>
+<%--        <label ><b>Mã người dùng</b></label>--%>
+        <input type="hidden" placeholder="Mã người dùng" name="manguoidung" required value="${existingNguoiDung.getManguoidung()}" >
 
         <label ><b>Họ tên</b></label>
         <input type="text" placeholder="Họ tên" name="hoten" required value="${existingNguoiDung.getHoten()}">
@@ -193,6 +191,11 @@
         <label ><b>Nhập lại mật khẩu</b></label>
         <input type="text" placeholder="Mật khẩu" name="matkhaulai" required value="${existingNguoiDung.getMatkhau()}">
 
+<%--    <label ><b>ID quyền</b></label>--%>
+    <input type="hidden" placeholder="ID quyền" name="idquyen" required value="${existingNguoiDung.getIDquyen()}" hidden>
+
+    <label ><b>Địa chỉ</b></label>
+    <input type="text" placeholder="Địa chỉ" name="diachi" required value="${existingNguoiDung.getDiachi()}">
 
         <div class="clearfix">
             <button type="button" class="cancelbtn"><a href="/TrangChu" style="color: white; text-decoration: none">Hủy</a></button>

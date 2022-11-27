@@ -148,17 +148,23 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="/TrangChu">Trang Chủ</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <c:if test="${sessionScope.nguoiDung != null}">
+                                <li><a href="/ThongTinCaNhan?manguoidung=${sessionScope.nguoiDung.manguoidung}">Cá Nhân</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.nguoiDung.IDquyen == 1}">
+                                <li><a href="/DanhMuc">Danh mục</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.nguoiDung.IDquyen == 1}">
+                                <li><a href="/DanhSachNguoiDung">Người dùng</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.nguoiDung.IDquyen == 2}">
+                                <li><a href="/DanhSachSanPham?manguoidung=${sessionScope.nguoiDung.manguoidung}">Sản phẩm</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.nguoiDung.IDquyen == 2}">
+                                <li><a href="/DanhSachSanPham?action=create">Thêm sản phẩm</a></li>
+                            </c:if>
+
+
                         </ul>
                     </nav>
                 </div>
@@ -166,7 +172,7 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> </a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> </a></li>
+                            <li><a href="/GioHang"><i class="fa fa-shopping-bag"></i> </a></li>
                         </ul>
                     </div>
                 </div>
@@ -191,7 +197,7 @@
                         <ul>
 
                             <c:forEach items="${danhMucs}" var="danhmuc">
-                                <li><a href="/DanhMuc?Madanhmuc=${danhmuc.getMadanhmuc()}">${danhmuc.getTendanhmuc()}</a></li>
+                                <li><a href="/DanhMuc?action=sanphamtheodanhmuc&Madanhmuc=${danhmuc.getMadanhmuc()}">${danhmuc.getTendanhmuc()}</a></li>
                             </c:forEach>
 
                         </ul>
@@ -284,7 +290,7 @@
                                 <ul class="featured__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a href="/GioHang?action=create&masp=${sanpham.getMasp()}"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
                             <div class="featured__item__text">

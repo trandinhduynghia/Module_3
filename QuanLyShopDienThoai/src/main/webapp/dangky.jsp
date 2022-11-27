@@ -124,6 +124,7 @@
     }
 </style>
 <body>
+
     <form method="post" class="modal-content" name="dangky" >
         <div class="container">
             <h1>Đăng ký</h1>
@@ -145,6 +146,16 @@
             <label><b>Nhập lại mật khẩu</b></label>
             <input type="password" placeholder="Nhập lại mật khẩu" name="matkhaulai" required>
 
+            <label ><b>Địa chỉ</b></label>
+            <input type="text" placeholder="Địa chỉ" name="diachi" required>
+
+            <label ><b>Loại người dùng</b></label>
+            <select name="idquyen">
+                <option value="0">Người dùng</option>
+                <option value="2">Người bán</option>
+            </select>
+<%--            <input type="text" placeholder="Địa chỉ" name="diachi" required>--%>
+
 
             <p>Bằng cách tạo một tài khoản, bạn đồng ý với <a href="#" style="color:dodgerblue">Điều khoản & Quyền riêng tư</a> của chúng tôi.</p>
 
@@ -152,9 +163,11 @@
                 <button type="button" class="cancelbtn"><a href="/TrangChu" style="color: white; text-decoration: none">Hủy</a></button>
                 <button type="submit" class="signupbtn">Đăng ký</button>
             </div>
+
         </div>
     </form>
-</div>
+
+
 </body>
 
 <script type="text/javascript">

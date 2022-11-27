@@ -1,5 +1,6 @@
 package dao;
 
+import model.NguoiDung;
 import model.SanPham;
 
 import java.sql.*;
@@ -59,7 +60,8 @@ public class SanPhamDAO {
                 String Ram = rs.getString("Ram");
                 String Anhbia = rs.getString("Anhbia");
                 int Madanhmuc = rs.getInt("Madanhmuc");
-                list.add(new SanPham(Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc));
+                int Manguoidung = rs.getInt("Manguoidung");
+                list.add(new SanPham(Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc, Manguoidung));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -86,7 +88,8 @@ public class SanPhamDAO {
                 String Ram = rs.getString("Ram");
                 String Anhbia = rs.getString("Anhbia");
                 int Madanhmuc = rs.getInt("Madanhmuc");
-                list.add(new SanPham(Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc));
+                int Manguoidung = rs.getInt("Manguoidung");
+                list.add(new SanPham(Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc, Manguoidung));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -94,31 +97,31 @@ public class SanPhamDAO {
         return list;
     }
 
-//    public List<SanPham> danhSachSanPhamTheoMasp (String Masp1){
-//        List<SanPham> list = new ArrayList<>();
-//        String query = "select * from sanpham where Masp = ?";
-//        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)){
-//            preparedStatement.setString(1, Masp1);
-//            ResultSet rs = preparedStatement.executeQuery();
-//            while (rs.next()) {
-//                int Masp = rs.getInt("Masp");
-//                String Tensp = rs.getString("Tensp");
-//                double Giatien = rs.getDouble("Giatien");
-//                int Soluong = rs.getInt("Soluong");
-//                String Mota = rs.getString("Mota");
-//                int Thesim = rs.getInt("Thesim");
-//                int Bonhotrong = rs.getInt("Bonhotrong");
-//                int Ram = rs.getInt("Ram");
-//                String Anhbia = rs.getString("Anhbia");
-//                int Mahang = rs.getInt("Mahang");
-//                int Mahdh = rs.getInt("Mahdh");
-//                list.add(new SanPham(Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonhotrong, Ram, Anhbia, Mahang, Mahdh));
-//            }
-//        } catch (SQLException e) {
-//            printSQLException(e);
-//        }
-//        return list;
-//    }
+    public List<SanPham> danhSachSanPhamTheoMaNguoiDung (String Manguoidung1){
+        List<SanPham> list = new ArrayList<>();
+        String query = "select * from sanpham where Manguoidung = ?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setString(1, Manguoidung1);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int Masp = rs.getInt("Masp");
+                String Tensp = rs.getString("Tensp");
+                double Giatien = rs.getDouble("Gia");
+                int Soluong = rs.getInt("Soluong");
+                String Mota = rs.getString("Mota");
+                String Thesim = rs.getString("Thesim");
+                String Bonho = rs.getString("Bonho");
+                String Ram = rs.getString("Ram");
+                String Anhbia = rs.getString("Anhbia");
+                int Madanhmuc = rs.getInt("Madanhmuc");
+                int Manguoidung = rs.getInt("Manguoidung");
+                list.add(new SanPham(Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc, Manguoidung));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return list;
+    }
 
     public SanPham sanPhamTheoMasp (String Masp1){
         SanPham sanPham = null;
@@ -131,7 +134,7 @@ public class SanPhamDAO {
             while (rs.next()) {
                 int Masp = rs.getInt("Masp");
                 String Tensp = rs.getString("Tensp");
-                double Giatien = rs.getDouble("Giatien");
+                double Giatien = rs.getDouble("Gia");
                 int Soluong = rs.getInt("Soluong");
                 String Mota = rs.getString("Mota");
                 String Thesim = rs.getString("Thesim");
@@ -139,12 +142,65 @@ public class SanPhamDAO {
                 String Ram = rs.getString("Ram");
                 String Anhbia = rs.getString("Anhbia");
                 int Madanhmuc = rs.getInt("Madanhmuc");
-                sanPham = new SanPham (Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc);
+                int Manguoidung = rs.getInt("Manguoidung");
+                sanPham = new SanPham (Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc, Manguoidung);
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
         return sanPham;
+    }
+
+    public boolean xoaSanPham(int Masp) throws SQLException {
+        boolean rowDeleted;
+        String query = "delete from sanpham where Masp = ?";
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, Masp);
+            rowDeleted = statement.executeUpdate() > 0;
+        }
+        return rowDeleted;
+    }
+
+    public boolean suaSanPham(SanPham sanPham) throws SQLException {
+        boolean rowUpdated;
+        String query = "update sanpham set Tensp = ?, Gia = ?, Soluong = ?, Mota = ?, Thesim = ?, Bonho = ?, Ram = ?, Anhbia = ?, Madanhmuc = ?, Manguoidung = ? where Masp = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setString(1,sanPham.getTensp());
+            statement.setDouble(2,sanPham.getGiatien());
+            statement.setInt(3,sanPham.getSoluong());
+            statement.setString(4,sanPham.getMota());
+            statement.setString(5,sanPham.getThesim());
+            statement.setString(6,sanPham.getBonho());
+            statement.setString(7,sanPham.getRam());
+            statement.setString(8,sanPham.getAnhbia());
+            statement.setInt(9,sanPham.getMadanhmuc());
+            statement.setInt(10,sanPham.getManguoidung());
+            statement.setInt(11,sanPham.getMasp());
+            rowUpdated = statement.executeUpdate() > 0;
+        }
+        return rowUpdated ;
+    }
+
+    public void themSanPham(SanPham sanPham){
+        String query = "insert into sanpham (Tensp, Gia, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc, Manguoidung) values(?,?,?,?,?,?,?,?,?,?);";
+        try{
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,sanPham.getTensp());
+            preparedStatement.setDouble(2, sanPham.getGiatien());
+            preparedStatement.setInt(3,sanPham.getSoluong());
+            preparedStatement.setString(4,sanPham.getMota());
+            preparedStatement.setString(5, sanPham.getThesim());
+            preparedStatement.setString(6, sanPham.getBonho());
+            preparedStatement.setString(7, sanPham.getRam());
+            preparedStatement.setString(8, sanPham.getAnhbia());
+            preparedStatement.setInt(9, sanPham.getMadanhmuc());
+            preparedStatement.setInt(10, sanPham.getManguoidung());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            printSQLException(e);
+        }
     }
 
 

@@ -43,28 +43,15 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
     }
 
     private void danhSachNguoiDung(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        int trang = 1;
-        int soLuongTrongTrang = 10;
         String hoTen = "";
-
         if (request.getParameter("hoTen") != null) {
             hoTen = request.getParameter("hoTen");
         }
 
-        if (request.getParameter("trang") != null)
-            trang = Integer.parseInt(request.getParameter("trang"));
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
-        List<NguoiDung> listNguoiDung = nguoiDungDAO.danhSachNguoiDung((trang - 1) * soLuongTrongTrang, soLuongTrongTrang, hoTen);
-        int soLuong = nguoiDungDAO.getSoLuong();
-
-        int soLuongTrang = (int) Math.ceil(soLuong * 1.0 / soLuongTrongTrang);
-
+        List<NguoiDung> listNguoiDung = nguoiDungDAO.danhSachNguoiDung(hoTen);
         request.setAttribute("listNguoiDung", listNguoiDung);
-        request.setAttribute("soLuongTrang", soLuongTrang);
-        request.setAttribute("trang", trang);
-
         request.setAttribute("hoTen", hoTen);
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("danhsachnguoidung.jsp");
         dispatcher.forward(request, response);
     }
@@ -114,11 +101,10 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         String Dienthoai = request.getParameter("dienthoai");
         String Matkhau = request.getParameter("matkhau");
         int IDquyen = Integer.parseInt(request.getParameter("idquyen"));
-        NguoiDung nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen);
+        String Diachi = request.getParameter("diachi");
+        NguoiDung nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi);
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
         nguoiDungDAO.suaNguoiDung(nguoiDung);
         response.sendRedirect("/DanhSachNguoiDung");
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("danhsachnguoidung.jsp");
-//        dispatcher.forward(request, response);
     }
 }

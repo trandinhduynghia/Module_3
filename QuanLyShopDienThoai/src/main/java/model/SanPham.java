@@ -11,11 +11,12 @@ public class SanPham {
     private String Ram;
     private String Anhbia;
     private int Madanhmuc;
+    private int Manguoidung;
 
     public SanPham() {
     }
 
-    public SanPham(int masp, String tensp, double giatien, int soluong, String mota, String thesim, String bonho, String ram, String anhbia, int madanhmuc) {
+    public SanPham(int masp, String tensp, double giatien, int soluong, String mota, String thesim, String bonho, String ram, String anhbia, int madanhmuc, int manguoidung) {
         Masp = masp;
         Tensp = tensp;
         Giatien = giatien;
@@ -26,9 +27,10 @@ public class SanPham {
         Ram = ram;
         Anhbia = anhbia;
         Madanhmuc = madanhmuc;
+        Manguoidung = manguoidung;
     }
 
-    public SanPham(String tensp, double giatien, int soluong, String mota, String thesim, String bonho, String ram, String anhbia, int madanhmuc) {
+    public SanPham(String tensp, double giatien, int soluong, String mota, String thesim, String bonho, String ram, String anhbia, int madanhmuc, int manguoidung) {
         Tensp = tensp;
         Giatien = giatien;
         Soluong = soluong;
@@ -38,6 +40,7 @@ public class SanPham {
         Ram = ram;
         Anhbia = anhbia;
         Madanhmuc = madanhmuc;
+        Manguoidung = manguoidung;
     }
 
     public int getMasp() {
@@ -118,5 +121,13 @@ public class SanPham {
 
     public void setMadanhmuc(int madanhmuc) {
         Madanhmuc = madanhmuc;
+    }
+
+    public int getManguoidung() {
+        return Manguoidung;
+    }
+
+    public void setManguoidung(int manguoidung) {
+        Manguoidung = manguoidung;
     }
 }

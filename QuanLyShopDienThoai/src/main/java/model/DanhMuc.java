@@ -12,6 +12,10 @@ public class DanhMuc {
         Tendanhmuc = tendanhmuc;
     }
 
+    public DanhMuc(String tendanhmuc) {
+        Tendanhmuc = tendanhmuc;
+    }
+
     public int getMadanhmuc() {
         return Madanhmuc;
     }

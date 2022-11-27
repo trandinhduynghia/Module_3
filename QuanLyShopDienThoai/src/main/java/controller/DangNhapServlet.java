@@ -34,7 +34,7 @@ public class DangNhapServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("nguoiDung", nguoiDung);
             // thời gian giũ session tài khoản
-            session.setMaxInactiveInterval(60);
+            session.setMaxInactiveInterval(120);
             response.sendRedirect("/TrangChu");
         }
 

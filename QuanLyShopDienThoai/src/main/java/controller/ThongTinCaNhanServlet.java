@@ -29,8 +29,10 @@ public class ThongTinCaNhanServlet extends HttpServlet {
         String Dienthoai = request.getParameter("dienthoai");
         String Matkhau = request.getParameter("matkhau");
         String Matkhaulai = request.getParameter("matkhaulai");
-        int IDquyen = 0;
-        NguoiDung nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen);
+        int IDquyen = Integer.parseInt(request.getParameter("idquyen"));
+        String Diachi = request.getParameter("diachi");
+
+        NguoiDung nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi);
         if (!Matkhau.equals(Matkhaulai)) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/thongtincanhan.jsp");
             dispatcher.forward(request, response);

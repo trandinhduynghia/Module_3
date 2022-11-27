@@ -42,7 +42,7 @@ public class NguoiDungDAO {
 
     public NguoiDung dangNhap(String email, String matKhau){
         NguoiDung nguoiDung= null;
-        String query = "select * from Nguoidung where Email = ? and Matkhau = ?";
+        String query = "select * from nguoidung where Email = ? and Matkhau = ?";
         try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)){
             preparedStatement.setString(1,email);
             preparedStatement.setString(2,matKhau);
@@ -54,7 +54,8 @@ public class NguoiDungDAO {
                 String Dienthoai = rs.getString("Dienthoai");
                 String Matkhau = rs.getString("Matkhau");
                 int IDquyen  = rs.getInt("IDquyen");
-                nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen);
+                String Diachi = rs.getString("Diachi");
+                nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi);
             }
         }catch (SQLException e){
             printSQLException(e);
@@ -62,34 +63,29 @@ public class NguoiDungDAO {
         return nguoiDung;
     }
 
-    public void dangKy(String Hoten, String Email, String Dienthoai, String Matkhau){
-        String query = "insert into nguoidung (Hoten, Email, Dienthoai, Matkhau, IDquyen) values(?,?,?,?,0);";
+    public void dangKy(String Hoten, String Email, String Dienthoai, String Matkhau, int IDquen, String Diachi){
+        String query = "insert into nguoidung (Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi) values(?,?,?,?,?,?);";
         try(Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)){
             preparedStatement.setString(1,Hoten);
             preparedStatement.setString(2,Email);
             preparedStatement.setString(3,Dienthoai);
             preparedStatement.setString(4,Matkhau);
+            preparedStatement.setInt(5, IDquen);
+            preparedStatement.setString(6, Diachi);
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             printSQLException(e);
         }
     }
 
-    public List<NguoiDung> danhSachNguoiDung(int batDau, int soLuong, String Hoten1){
-        String query = "select SQL_CALC_FOUND_ROWS * from nguoidung where Hoten like ? limit " + batDau + ", " + soLuong;
+    public List<NguoiDung> danhSachNguoiDung(String Hoten1){
         List<NguoiDung> list = new ArrayList<>();
-        NguoiDung nguoiDung = null;
-
-        Connection connection = null;
-        PreparedStatement stmt = null;
+        String query = "select  * from nguoidung where Hoten like ?";
         try {
-            connection  = getConnection();
-            stmt = connection.prepareStatement(query);
-            stmt.setString(1,'%'+ Hoten1 +'%');
-
-            System.out.println(stmt);
-
-            ResultSet rs = stmt.executeQuery();
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, '%'+ Hoten1 + '%');
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int Manguoidung = rs.getInt("Manguoidung");
                 String Hoten  = rs.getString("Hoten");
@@ -97,33 +93,15 @@ public class NguoiDungDAO {
                 String Dienthoai = rs.getString("Dienthoai");
                 String Matkhau = rs.getString("Matkhau");
                 int IDquyen  = rs.getInt("IDquyen");
-                list.add(new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen));
+                String Diachi = rs.getString("Diachi");
+                list.add(new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi));
             }
-            rs.close();
-            rs = stmt.executeQuery("SELECT FOUND_ROWS()");
-            if(rs.next())
-                this.soLuong = rs.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally
-        {
-            try {
-                if(stmt != null)
-                    stmt.close();
-                if(connection != null)
-                    connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return list;
     }
 
-    private int soLuong;
-
-    public int getSoLuong() {
-        return soLuong;
-    }
 
     public NguoiDung nguoiDungTheoMa(int Manguoidung1) {
         NguoiDung nguoiDung = null;
@@ -138,7 +116,8 @@ public class NguoiDungDAO {
                 String Dienthoai = rs.getString("Dienthoai");
                 String Matkhau = rs.getString("Matkhau");
                 int IDquyen  = rs.getInt("IDquyen");
-                nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen);
+                String Diachi = rs.getString("Diachi");
+                nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi);
             }
         }catch (SQLException e){
             printSQLException(e);
@@ -158,28 +137,30 @@ public class NguoiDungDAO {
 
     public boolean suaNguoiDung(NguoiDung nguoiDung) throws SQLException {
         boolean rowUpdated;
-        String query = "update nguoidung set Hoten = ?, Email= ?, Dienthoai = ?, Matkhau = ?, IDquyen = ? where Manguoidung = ?";
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+        String query = "update nguoidung set Hoten = ?, Email= ?, Dienthoai = ?, Matkhau = ?, IDquyen = ?, Diachi = ? where Manguoidung = ?";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);){
             statement.setString(1,nguoiDung.getHoten());
             statement.setString(2,nguoiDung.getEmail());
             statement.setString(3,nguoiDung.getDienthoai());
             statement.setString(4,nguoiDung.getMatkhau());
             statement.setInt(5,nguoiDung.getIDquyen());
-            statement.setInt(6,nguoiDung.getManguoidung());
+            statement.setString(6,nguoiDung.getDiachi());
+            statement.setInt(7,nguoiDung.getManguoidung());
             rowUpdated = statement.executeUpdate() > 0;
         }
-        return rowUpdated;
+        return rowUpdated ;
     }
 
     public boolean suaThongTinCaNhan(NguoiDung nguoiDung) throws SQLException {
         boolean rowUpdated;
-        String query = "update nguoidung set Hoten = ?, Email= ?, Dienthoai = ?, Matkhau = ?, IDquyen = ? where Manguoidung = ?";
+        String query = "update nguoidung set Hoten = ?, Email= ?, Dienthoai = ?, Matkhau = ?, Diachi = ? where Manguoidung = ?";
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1,nguoiDung.getHoten());
             statement.setString(2,nguoiDung.getEmail());
             statement.setString(3,nguoiDung.getDienthoai());
             statement.setString(4,nguoiDung.getMatkhau());
-            statement.setInt(5,nguoiDung.getIDquyen());
+            statement.setString(5,nguoiDung.getDiachi());
             statement.setInt(6,nguoiDung.getManguoidung());
             rowUpdated = statement.executeUpdate() > 0;
         }

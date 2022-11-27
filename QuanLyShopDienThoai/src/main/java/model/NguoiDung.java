@@ -7,17 +7,28 @@ public class NguoiDung {
     private String Dienthoai;
     private String Matkhau;
     private int IDquyen;
+    private String Diachi;
 
     public NguoiDung() {
     }
 
-    public NguoiDung(int manguoidung, String hoten, String email, String dienthoai, String matkhau, int IDquyen) {
+    public NguoiDung(int manguoidung, String hoten, String email, String dienthoai, String matkhau, int IDquyen, String diachi) {
         Manguoidung = manguoidung;
         Hoten = hoten;
         Email = email;
         Dienthoai = dienthoai;
         Matkhau = matkhau;
         this.IDquyen = IDquyen;
+        Diachi = diachi;
+    }
+
+    public NguoiDung(String hoten, String email, String dienthoai, String matkhau, int IDquyen, String diachi) {
+        Hoten = hoten;
+        Email = email;
+        Dienthoai = dienthoai;
+        Matkhau = matkhau;
+        this.IDquyen = IDquyen;
+        Diachi = diachi;
     }
 
     public int getManguoidung() {
@@ -66,5 +77,13 @@ public class NguoiDung {
 
     public void setIDquyen(int IDquyen) {
         this.IDquyen = IDquyen;
+    }
+
+    public String getDiachi() {
+        return Diachi;
+    }
+
+    public void setDiachi(String diachi) {
+        Diachi = diachi;
     }
 }

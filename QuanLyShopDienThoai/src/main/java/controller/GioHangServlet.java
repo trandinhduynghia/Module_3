@@ -31,7 +31,7 @@ public class GioHangServlet extends HttpServlet {
                     xoaGioHang(request, response);
                     break;
                 default:
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("giohang.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("giohang/giohang.jsp");
                     dispatcher.forward(request, response);
             }
         } catch (SQLException ex) {
@@ -91,7 +91,7 @@ public class GioHangServlet extends HttpServlet {
                 }
             }
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("giohang.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("giohang/giohang.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -108,7 +108,7 @@ public class GioHangServlet extends HttpServlet {
         gioHang.xoaMatHang(Masp);
 
         session.setAttribute("gioHang", gioHang);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("giohang.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("giohang/giohang.jsp");
         dispatcher.forward(request, response);
     }
 

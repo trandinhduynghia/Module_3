@@ -188,6 +188,9 @@
         <label ><b>Mật khẩu</b></label>
         <input type="text" placeholder="Mật khẩu" name="matkhau" required value="${existingNguoiDung.getMatkhau()}">
 
+        <label ><b>Địa chỉ</b></label>
+        <input type="text" placeholder="Địa chỉ" name="diachi" required value="${existingNguoiDung.getDiachi()}">
+
         <label ><b>ID quyền</b></label>
         <input type="text" placeholder="Mật khẩu" name="idquyen" required value="${existingNguoiDung.getIDquyen()}">
 

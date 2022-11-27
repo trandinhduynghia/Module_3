@@ -22,12 +22,14 @@ public class DangKyServlet extends HttpServlet {
         String Dienthoai = request.getParameter("dienthoai");
         String Matkhau = request.getParameter("matkhau");
         String Matkhaulai = request.getParameter("matkhaulai");
+        String Diachi = request.getParameter("diachi");
+        int IDquyen = Integer.parseInt(request.getParameter("idquyen"));
         if (!Matkhau.equals(Matkhaulai)) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("dangky.jsp");
             dispatcher.forward(request, response);
         } else {
             NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
-            nguoiDungDAO.dangKy(Hoten, Email, Dienthoai, Matkhau);
+            nguoiDungDAO.dangKy(Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi);
             response.sendRedirect("/TrangChu");
         }
     }
