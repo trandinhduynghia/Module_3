@@ -8,6 +8,8 @@ foreign key (Manguoidung) references nguoidung(Manguoidung)
 );
 ALTER TABLE donhang
 MODIFY COLUMN Madon int auto_increment;
+ALTER TABLE donhang
+ADD Manguoiban int;
 select  Madon from donhang order by Madon desc limit 1;
 select * from nguoidung;
 select * from donhang;
@@ -115,3 +117,7 @@ foreign key (Manguoidung) references nguoidung(Manguoidung)
 select * from sanpham;
 
 select * from nguoidung;
+SET SQL_SAFE_UPDATES = 0;
+select * from chitietdonhang where Madon like '3';
+select * from chitietdonhang;
+delete from chitietdonhang where Madon like '4';

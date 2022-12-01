@@ -96,10 +96,11 @@ public class DanhMucDAO {
 
     public boolean suaDanhMuc(DanhMuc danhMuc) throws SQLException {
         boolean rowUpdated;
-        String query = "update danhmuc set Tendanhmuc = ? where Mandanhmuc = ?";
+        String query = "update danhmuc set Tendanhmuc = ? where Madanhmuc = ?";
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)){
             statement.setString(1, danhMuc.getTendanhmuc());
+            statement.setInt(2, danhMuc.getMadanhmuc());
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated ;

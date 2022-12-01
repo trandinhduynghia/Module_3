@@ -55,9 +55,7 @@ public class DonHangServlet extends HttpServlet {
             DonHangDAO donHangDAO = new DonHangDAO();
             donHangDAO.themDonHang(nguoiDung, gioHang);
             session.removeAttribute("gioHang");
-            //response.sendRedirect("");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("thanhtoan.jsp");
-            dispatcher.forward(request, response);
+            response.sendRedirect("/TrangChu");
         }else {
             RequestDispatcher dispatcher = request.getRequestDispatcher("dangnhap.jsp");
             dispatcher.forward(request, response);

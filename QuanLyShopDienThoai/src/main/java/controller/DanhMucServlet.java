@@ -25,7 +25,7 @@ public class DanhMucServlet extends HttpServlet {
         try {
             switch (action) {
                 case "create":
-                    response.sendRedirect("/DangKy");
+                    formThemDanhMuc(request, response);
                     break;
                 case "edit":
                     formSuaDanhMuc(request, response);
@@ -51,7 +51,7 @@ public class DanhMucServlet extends HttpServlet {
         DanhMucDAO danhMucDAO = new DanhMucDAO();
         List<DanhMuc> listDanhmuc = danhMucDAO.listDanhMuc();
         request.setAttribute("listDanhmuc", listDanhmuc);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("danhmuc/danhmuc.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("danhmuc/danhsachdanhmuc.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -67,7 +67,12 @@ public class DanhMucServlet extends HttpServlet {
         DanhMucDAO danhMucDAO = new DanhMucDAO();
         DanhMuc danhMuc = danhMucDAO.timDanhMuc(MaDanhmuc);
         request.setAttribute("danhMuc", danhMuc);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("danhmuc/suadanhmuc.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formThemDanhMuc(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("danhmuc/themdanhmuc.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -94,7 +99,7 @@ public class DanhMucServlet extends HttpServlet {
         }
         try {
             switch (action) {
-                case "crate":
+                case "create":
                     themDanhmuc(request, response);
                     break;
                 case "edit":
@@ -116,9 +121,9 @@ public class DanhMucServlet extends HttpServlet {
     }
 
     private void themDanhmuc(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-        int Madanhmuc = Integer.parseInt(request.getParameter("madanhmuc"));
+//        int Madanhmuc = Integer.parseInt(request.getParameter("madanhmuc"));
         String Tendanhmuc = request.getParameter("tendanhmuc");
-        DanhMuc danhMuc = new DanhMuc(Madanhmuc, Tendanhmuc);
+        DanhMuc danhMuc = new DanhMuc(Tendanhmuc);
         DanhMucDAO danhMucDAO = new DanhMucDAO();
         danhMucDAO.themDanhmuc(danhMuc);
         response.sendRedirect("/DanhMuc");

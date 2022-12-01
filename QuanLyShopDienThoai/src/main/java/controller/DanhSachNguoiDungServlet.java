@@ -52,7 +52,7 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         List<NguoiDung> listNguoiDung = nguoiDungDAO.danhSachNguoiDung(hoTen);
         request.setAttribute("listNguoiDung", listNguoiDung);
         request.setAttribute("hoTen", hoTen);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("danhsachnguoidung.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/danhsachnguoidung.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -60,15 +60,14 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         int maNguoiDung = Integer.parseInt(request.getParameter("manguoidung"));
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
         nguoiDungDAO.xoaNguoiDung(maNguoiDung);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("danhsachnguoidung.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("/DanhSachNguoiDung");
     }
 
     private void formSuaNguoiDung(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int maNguoiDung = Integer.parseInt(request.getParameter("manguoidung"));
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
         NguoiDung existingNguoiDung = nguoiDungDAO.nguoiDungTheoMa(maNguoiDung);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/suanguoidung.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/suanguoidung1.jsp");
         request.setAttribute("existingNguoiDung", existingNguoiDung);
         dispatcher.forward(request, response);
     }
@@ -82,7 +81,7 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         }
         try {
             switch (action) {
-                case "crate":
+                case "create":
                     response.sendRedirect("/DangKy");
                     break;
                 case "edit":
@@ -100,11 +99,24 @@ public class DanhSachNguoiDungServlet extends HttpServlet {
         String Email = request.getParameter("email");
         String Dienthoai = request.getParameter("dienthoai");
         String Matkhau = request.getParameter("matkhau");
+        String Matkhaulai = request.getParameter("matkhaulai");
         int IDquyen = Integer.parseInt(request.getParameter("idquyen"));
         String Diachi = request.getParameter("diachi");
         NguoiDung nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi);
-        NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
-        nguoiDungDAO.suaNguoiDung(nguoiDung);
-        response.sendRedirect("/DanhSachNguoiDung");
+
+
+        if (!Matkhau.equals(Matkhaulai)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/canhan.jsp");
+//            request.setAttribute("existingNguoiDung", nguoiDung);
+            dispatcher.forward(request, response);
+        } else {
+            NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
+            try {
+                nguoiDungDAO.suaNguoiDung(nguoiDung);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            response.sendRedirect("/DanhSachNguoiDung");
+        }
     }
 }

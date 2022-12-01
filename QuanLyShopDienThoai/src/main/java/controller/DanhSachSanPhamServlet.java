@@ -45,7 +45,7 @@ public class DanhSachSanPhamServlet extends HttpServlet {
         SanPhamDAO sanPhamDAO = new SanPhamDAO();
         List<SanPham> listSanPham = sanPhamDAO.danhSachSanPhamTheoMaNguoiDung(Manguoidung);
         request.setAttribute("listSanPham", listSanPham);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("sanpham/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("sanpham/danhsachsanpham.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -60,12 +60,12 @@ public class DanhSachSanPhamServlet extends HttpServlet {
         String Masp = request.getParameter("masp");
         SanPhamDAO sanPhamDAO = new SanPhamDAO();
         SanPham sanPham = sanPhamDAO.sanPhamTheoMasp(Masp);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("suasanpham/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("sanpham/suasanpham.jsp");
         request.setAttribute("sanPham", sanPham);
         dispatcher.forward(request, response);
     }
     private void formThemSanPham(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("themsanpham/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("sanpham/themsanpham.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -104,7 +104,7 @@ public class DanhSachSanPhamServlet extends HttpServlet {
         SanPham sanPham = new SanPham(Masp, Tensp, Giatien, Soluong, Mota, Thesim, Bonho, Ram, Anhbia, Madanhmuc, Manguoidung);
         SanPhamDAO sanPhamDAO = new SanPhamDAO();
         sanPhamDAO.suaSanPham(sanPham);
-        response.sendRedirect("/DanhSachSanPham");
+        response.sendRedirect("/TrangChu");
     }
 
     private void themSanPham(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {

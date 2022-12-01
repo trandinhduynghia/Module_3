@@ -6,8 +6,7 @@ public class ChiTietDonHang {
     private int Soluong;
     private double Dongia;
 
-    public ChiTietDonHang() {
-    }
+
 
     public ChiTietDonHang(int madon, int masp, int soluong, double dongia) {
         Madon = madon;
@@ -46,5 +45,11 @@ public class ChiTietDonHang {
 
     public void setDongia(double dongia) {
         Dongia = dongia;
+    }
+
+    public double getThanhTien(){
+        double thanhTien = 0;
+        thanhTien += Soluong * Dongia;
+        return thanhTien;
     }
 }

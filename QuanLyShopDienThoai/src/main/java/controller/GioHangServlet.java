@@ -84,7 +84,7 @@ public class GioHangServlet extends HttpServlet {
                         matHang.setDongia(sanPham.getGiatien());
                         listMatHang.add(matHang);
                     }
-                    if(Soluong < 0){
+                    if(Soluong == 0){
                         gioHang.xoaMatHang(Masp1);
                     }
                     session.setAttribute("gioHang", gioHang);

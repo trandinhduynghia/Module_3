@@ -5,15 +5,17 @@ public class DonHang {
     private String Ngaydat;
     private String Tinhtrang;
     private int Manguoidung;
+    private int Manguoiban;
 
     public DonHang() {
     }
 
-    public DonHang(int madon, String ngaydat, String tinhtrang, int manguoidung) {
+    public DonHang(int madon, String ngaydat, String tinhtrang, int manguoidung, int manguoiban) {
         this.Madon = madon;
         this.Ngaydat = ngaydat;
         this.Tinhtrang = tinhtrang;
         this.Manguoidung = manguoidung;
+        this.Manguoiban = manguoiban;
     }
 
     public int getMadon() {
@@ -46,5 +48,13 @@ public class DonHang {
 
     public void setManguoidung(int manguoidung) {
         Manguoidung = manguoidung;
+    }
+
+    public int getManguoiban() {
+        return Manguoiban;
+    }
+
+    public void setManguoiban(int manguoiban) {
+        Manguoiban = manguoiban;
     }
 }

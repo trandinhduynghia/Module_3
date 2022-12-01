@@ -16,7 +16,7 @@ public class ThongTinCaNhanServlet extends HttpServlet {
         int maNguoiDung = Integer.parseInt(request.getParameter("manguoidung"));
         NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
         NguoiDung existingNguoiDung = nguoiDungDAO.nguoiDungTheoMa(maNguoiDung);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/thongtincanhan.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/canhan.jsp");
         request.setAttribute("existingNguoiDung", existingNguoiDung);
         dispatcher.forward(request, response);
     }
@@ -34,7 +34,9 @@ public class ThongTinCaNhanServlet extends HttpServlet {
 
         NguoiDung nguoiDung = new NguoiDung(Manguoidung, Hoten, Email, Dienthoai, Matkhau, IDquyen, Diachi);
         if (!Matkhau.equals(Matkhaulai)) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/thongtincanhan.jsp");
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("nguoidung/canhan.jsp");
+//            request.setAttribute("existingNguoiDung", nguoiDung);
             dispatcher.forward(request, response);
         } else {
             NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();

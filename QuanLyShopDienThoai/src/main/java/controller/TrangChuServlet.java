@@ -28,7 +28,7 @@ public class TrangChuServlet extends HttpServlet {
         List<DanhMuc> danhMucs = danhMucDAO.listDanhMuc();
         request.setAttribute("danhMucs", danhMucs);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ogani-master/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
     }
 

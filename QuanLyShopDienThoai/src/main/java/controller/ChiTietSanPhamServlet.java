@@ -13,16 +13,11 @@ import java.util.List;
 public class ChiTietSanPhamServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String Masp = request.getParameter("Masp");
+        String Masp = request.getParameter("masp");
         SanPhamDAO dao = new SanPhamDAO();
-        List<SanPham> list = (List<SanPham>) dao.sanPhamTheoMasp(Masp);
-        request.setAttribute("list",list);
-
-//        HangSanXuatDAO dao1 = new HangSanXuatDAO();
-//        List<HangSanXuat> list1 = dao1.danhHangSanXuat();
-//        request.setAttribute("list1",list1);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("chitietsanpham.jsp");
+        SanPham sanPham = dao.sanPhamTheoMasp(Masp);
+        request.setAttribute("sanPham",sanPham);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("sanpham/chitietsanpham.jsp");
         dispatcher.forward(request, response);
 
     }
